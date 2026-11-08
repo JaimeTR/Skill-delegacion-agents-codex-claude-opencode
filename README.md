@@ -70,6 +70,29 @@ Después, **una sola vez**:
 codex login      # abre el navegador; inicia con tu cuenta de ChatGPT
 ```
 
+## Activar y desactivar
+
+Por defecto está **activada**. Se controla hablándole al agente, que guarda el estado en un archivo JSON:
+
+| Dices | Efecto |
+|---|---|
+| "desactiva la delegación" | No delega en ningún proyecto (global) |
+| "activa la delegación" | Vuelve a delegar |
+| "en este proyecto no delegues" | Solo ese proyecto queda desactivado |
+| "sin Codex" / "sin OpenCode" | Apaga solo ese modelo |
+| "estado de la delegación" | Te dice qué está activo y dónde |
+| "solo por esta vez, hazlo tú" | Una tarea sin delegar, sin cambiar la configuración |
+
+Archivos (el del proyecto tiene prioridad sobre el global):
+- Global: `~/.claude/codex-claude-opencode.json`
+- Proyecto: `<proyecto>/.claude/codex-claude-opencode.json`
+
+```json
+{ "enabled": true, "codex": true, "opencode": true }
+```
+
+También puedes editarlos a mano. Sin archivo, todo queda activado.
+
 ## Cómo trabaja
 
 1. Plan breve: qué piezas hay y quién hace cada una.

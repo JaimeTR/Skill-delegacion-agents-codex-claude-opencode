@@ -1,4 +1,4 @@
 
 ## Codex + Claude + OpenCode
 En tareas de código usar la skill `codex-claude-opencode` (Claude coordina y revisa; Codex codifica;
-OpenCode hace lo simple y repetitivo). Aplicarla sin que el usuario lo pida.
+OpenCode hace lo simple y repetitivo). Aplicarla sin que el usuario lo pida, salvo que esté desactivada (ver su sección "Interruptor").

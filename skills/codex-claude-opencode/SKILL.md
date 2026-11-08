@@ -9,6 +9,36 @@ Claude es el **coordinador**: entiende, propone, divide, asigna, revisa y entreg
 Codex y OpenCode son **ejecutores** que Claude invoca por CLI desde Bash.
 Esta skill se aplica sola; el usuario no tiene que indicarlo.
 
+## 0. Interruptor: activar / desactivar (revisar SIEMPRE primero)
+
+Estado en un archivo JSON. Se lee en este orden y el primero que exista manda:
+1. `<proyecto>/.claude/codex-claude-opencode.json` (solo ese proyecto)
+2. `~/.claude/codex-claude-opencode.json` (global, todos los proyectos)
+3. Si no existe ninguno: todo activado.
+
+```json
+{ "enabled": true, "codex": true, "opencode": true }
+```
+
+- `enabled: false` -> NO delegar nada; Claude trabaja solo como si la skill no existiera.
+- `codex: false` -> no usar Codex (sus tareas las hace OpenCode si son simples, o Claude).
+- `opencode: false` -> no usar OpenCode (sus tareas las hace Codex o Claude).
+
+Frases del usuario y qué hacer (editar el JSON, confirmar en una línea y aplicarlo de inmediato):
+
+| El usuario dice | Acción |
+|---|---|
+| "desactiva la delegación" / "trabaja solo" | global `enabled: false` |
+| "activa la delegación" | global `enabled: true` |
+| "en este proyecto no delegues" | crear el JSON del proyecto con `enabled: false` |
+| "en este proyecto sí delega" | JSON del proyecto con `enabled: true` |
+| "sin Codex" / "usa Codex otra vez" | `codex: false` / `codex: true` |
+| "sin OpenCode" / "usa OpenCode otra vez" | `opencode: false` / `opencode: true` |
+| "estado de la delegación" | leer los JSON y decir qué está activo y dónde |
+| "solo por esta vez, hazlo tú" | no tocar el JSON; esa tarea la hace Claude |
+
+Si el JSON es inválido, avisar y tratarlo como activado. Nunca guardar secretos en él.
+
 ## 1. Cuándo usarla y cuándo NO
 
 Delegar cuando la tarea es **grande o repetitiva y está bien definida**:
