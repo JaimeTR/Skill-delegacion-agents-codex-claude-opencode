@@ -93,6 +93,18 @@ Archivos (el del proyecto tiene prioridad sobre el global):
 
 También puedes editarlos a mano. Sin archivo, todo queda activado.
 
+## Relevo: terminar y subir a GitHub si se acaba el crédito de Claude
+
+Para no dejar el trabajo a medio camino, cuando el límite de Claude se acerca el agente:
+1. deja el código en un punto estable,
+2. escribe un `HANDOFF.md` (qué falta, reglas, cómo subirlo),
+3. hace un commit `WIP:`,
+4. lanza a **Codex** (o a **OpenCode** para pasos mecánicos) para que termine, pruebe, commitee y suba a GitHub.
+
+Si Claude ya no tiene crédito, tú inicias el relevo a mano: abres `codex` u `opencode` en la carpeta del proyecto
+y pegas "Lee HANDOFF.md y cumple exactamente lo que pide". Detalle, plantilla y cuidados (sin force push, sin secretos,
+detenerse ante conflictos) en `skills/codex-claude-opencode/references/relevo.md`.
+
 ## Cómo trabaja
 
 1. Plan breve: qué piezas hay y quién hace cada una.
@@ -111,6 +123,7 @@ skills/codex-claude-opencode/
   references/codex.md              # referencia del CLI de Codex
   references/opencode.md           # referencia del CLI de OpenCode
   references/plantillas-prompts.md # plantillas de prompts de delegación
+  references/relevo.md             # relevo y subida a GitHub si se acaba el crédito
 CLAUDE-snippet.md                  # regla que activa la skill en todos los proyectos
 setup.ps1 / setup.sh               # instalación
 ```

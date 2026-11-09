@@ -122,7 +122,15 @@ Si la carpeta no es un repo git, Codex necesita `--skip-git-repo-check`.
 - Los modelos gratuitos pueden retener o entrenar con el contenido: no enviarles código confidencial.
 - Informar siempre al usuario qué se delegó y cómo se verificó.
 
-## 7. Si algo falla
+## 7. Relevo si se acaba el crédito de Claude
+
+Si el límite de uso de Claude se acerca, NO dejar nada a medio camino: dejar un punto estable,
+escribir `HANDOFF.md`, commit `WIP:` y lanzar a Codex (o a OpenCode para pasos mecánicos) para que
+termine lo pendiente, corra tests, commitee y suba a GitHub. Plantilla, comandos y reglas en
+`references/relevo.md`. Nunca force push; ante conflictos o ramas protegidas, detenerse y avisar.
+Si Claude ya no tiene crédito, el usuario puede iniciar el relevo a mano (ver `references/relevo.md`, sección 3).
+
+## 8. Si algo falla
 
 | Síntoma | Acción |
 |---|---|
