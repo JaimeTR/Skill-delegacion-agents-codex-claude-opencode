@@ -33,7 +33,7 @@ else { Write-Host "  [--] GitHub sin conectar (necesario para PR con gh; git pus
 if ($pasos.Count -gt 0) { Write-Host ""; Write-Host "Para conectar lo que falta:"; $pasos | ForEach-Object { Write-Host "  - $_" } }
 
 if ($Escribir -and -not (Test-Path $cfg)) {
-  $relevo = @("codex", "opencode", "copilot") | Where-Object { $st[$_] }
+  $relevo = @("codex", "copilot", "opencode") | Where-Object { $st[$_] }
   $obj = [ordered]@{ enabled = $true; codex = $st.codex; opencode = $st.opencode; copilot = $st.copilot; relevo = @($relevo) }
   New-Item -ItemType Directory -Force (Split-Path $cfg) | Out-Null
   $obj | ConvertTo-Json -Compress | Set-Content $cfg -Encoding UTF8

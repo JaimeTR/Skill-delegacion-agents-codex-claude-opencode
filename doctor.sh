@@ -33,7 +33,7 @@ else echo "  [--] GitHub sin conectar (necesario para subir con gh/PR; git push 
 if [ ${#pasos[@]} -gt 0 ]; then echo; echo "Para conectar lo que falta:"; for p in "${pasos[@]}"; do echo "  - $p"; done; fi
 
 if [ "$1" = "--escribir" ] && [ ! -f "$CFG" ]; then
-  r=""; for m in codex opencode copilot; do [ "${!m}" = true ] && r="$r\"$m\", "; done; r="[${r%, }]"
+  r=""; for m in codex copilot opencode; do [ "${!m}" = true ] && r="$r\"$m\", "; done; r="[${r%, }]"
   mkdir -p "$HOME/.claude"
   printf '{ "enabled": true, "codex": %s, "opencode": %s, "copilot": %s, "relevo": %s }\n' "$codex" "$opencode" "$copilot" "$r" > "$CFG"
   echo; echo "Configuracion creada en $CFG"
