@@ -20,7 +20,7 @@ else echo "  [--] OpenCode no instalado -> se omite"; pasos+=("npm install -g op
 
 # Copilot
 if command -v copilot >/dev/null 2>&1 && copilot --version >/dev/null 2>&1; then copilot=true; echo "  [OK] Copilot CLI (si no has iniciado sesion: ejecuta copilot y usa /login)"
-else echo "  [--] Copilot CLI no instalado -> se omite"; pasos+=("Copilot es opcional: requiere suscripcion de GitHub Copilot (plan gratuito disponible)"); fi
+else echo "  [--] Copilot CLI no instalado -> se omite"; pasos+=("Copilot (opcional, requiere suscripcion de GitHub Copilot): npm install -g @github/copilot ; luego ejecutar copilot y escribir /login"); fi
 
 # GitHub / git
 if command -v git >/dev/null 2>&1; then

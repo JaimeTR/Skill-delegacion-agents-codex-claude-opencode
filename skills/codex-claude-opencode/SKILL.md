@@ -17,13 +17,14 @@ Estado en un archivo JSON. Se lee en este orden y el primero que exista manda:
 3. Si no existe ninguno: todo activado.
 
 ```json
-{ "enabled": true, "codex": true, "opencode": true, "relevo": ["codex", "opencode"] }
+{ "enabled": true, "codex": true, "opencode": true, "copilot": true, "relevo": ["codex", "copilot", "opencode"] }
 ```
 
 - `relevo`: orden en que los modelos toman el relevo (terminar, commitear y subir) si Claude se queda sin crédito.
 - `enabled: false` -> NO delegar nada; Claude trabaja solo como si la skill no existiera.
 - `codex: false` -> no usar Codex (sus tareas las hace OpenCode si son simples, o Claude).
 - `opencode: false` -> no usar OpenCode (sus tareas las hace Codex o Claude).
+- `copilot: false` -> no usar Copilot (sus tareas las hace Codex o Claude).
 
 Frases del usuario y qué hacer (editar el JSON, confirmar en una línea y aplicarlo de inmediato):
 
@@ -34,6 +35,7 @@ Frases del usuario y qué hacer (editar el JSON, confirmar en una línea y aplic
 | "en este proyecto no delegues" | crear el JSON del proyecto con `enabled: false` |
 | "en este proyecto sí delega" | JSON del proyecto con `enabled: true` |
 | "sin Codex" / "usa Codex otra vez" | `codex: false` / `codex: true` |
+| "sin Copilot" / "usa Copilot otra vez" | `copilot: false` / `copilot: true` |
 | "sin OpenCode" / "usa OpenCode otra vez" | `opencode: false` / `opencode: true` |
 | "estado de la delegación" | leer los JSON y decir qué está activo y dónde |
 | "solo por esta vez, hazlo tú" | no tocar el JSON; esa tarea la hace Claude |
@@ -62,8 +64,10 @@ NO delegar (Claude lo hace directo):
 | **Claude** | Plan, arquitectura, decisiones, asignar, revisar, integrar | Tokens de Claude (ahorrarlos) |
 | **Codex** | Codificar piezas definidas, tests, segunda opinión | Cuenta ChatGPT del usuario |
 | **OpenCode** | Boilerplate, docs, traducciones, mecánico, búsquedas | Gratis (modelos `-free`) |
+| **Copilot** (opcional) | Revisión/segunda opinión, código en paralelo, pasos de git | Suscripción GitHub Copilot del usuario |
 
-Escalado: si OpenCode sale flojo, repetir con Codex; si Codex falla, lo hace Claude.
+Escalado: si OpenCode sale flojo, repetir con Codex o Copilot; si fallan, lo hace Claude.
+Solo usar los que estén disponibles (ver sección 3).
 
 ## 3. Verificación previa (una vez por sesión)
 
@@ -112,7 +116,12 @@ codex exec -C "<carpeta>" -s read-only -o "<archivo>" "<prompt>"
 # OpenCode - tarea simple con modelo gratuito
 opencode run --dir "<carpeta>" -m opencode/<modelo>-free "<prompt>"
 opencode models        # listar modelos disponibles (elegir los que terminan en -free)
+
+# Copilot (opcional) - revisar / escribir con permisos acotados (nunca --allow-all ni --yolo)
+copilot -p "<prompt>" -s --no-ask-user
+copilot -p "<prompt>" -s --no-ask-user --allow-tool 'write'
 ```
+Detalle de Copilot en `references/copilot.md`.
 
 Para tareas largas usar ejecución en segundo plano y esperar el aviso de finalización; no hacer polling.
 Si la carpeta no es un repo git, Codex necesita `--skip-git-repo-check`.

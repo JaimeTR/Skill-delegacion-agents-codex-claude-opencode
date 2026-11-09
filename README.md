@@ -12,6 +12,7 @@ Un paquete de instrucciones, scripts y plantillas que le enseña a tu agente a t
 | **Coordinador** | Claude | Entiende el pedido, propone el enfoque, divide, asigna, revisa y entrega |
 | **Programador** | Codex (tu cuenta de ChatGPT) | Codifica piezas ya definidas, escribe tests, da segunda opinión |
 | **Ayudante** | OpenCode (modelos gratuitos) | Hace lo simple y repetitivo: boilerplate, documentación, traducciones, renombres |
+| **Opcional** | GitHub Copilot CLI | Revisión y segunda opinión, código en paralelo, pasos de git (solo si tienes Copilot) |
 
 ## ¿Para qué sirve?
 
@@ -150,6 +151,7 @@ skills/codex-claude-opencode/
   references/codex.md              # referencia del CLI de Codex
   references/opencode.md           # referencia del CLI de OpenCode
   references/plantillas-prompts.md # plantillas de prompts de delegación
+  references/copilot.md            # referencia del CLI de GitHub Copilot (opcional)
   references/relevo.md             # relevo y subida a GitHub si se acaba el crédito
 CLAUDE-snippet.md                  # regla que activa la skill en todos los proyectos
 setup.ps1 / setup.sh               # instalación guiada

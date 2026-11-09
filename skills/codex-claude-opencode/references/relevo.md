@@ -16,6 +16,10 @@ Cuando el límite de Claude ya se agotó, Claude **no puede lanzar nada**. Por e
    ```bash
    # Preferido: Codex termina, prueba, commitea y sube
    codex exec -C "<proyecto>" -s workspace-write "Lee HANDOFF.md y cumple exactamente lo que pide."
+   # Alternativa: Copilot (si está disponible), con permisos acotados y sin force push
+   copilot -p "Lee HANDOFF.md y cumple exactamente lo que pide." -s --no-ask-user --add-dir "<proyecto>" \
+     --allow-tool 'write' --allow-tool 'shell(git add:*)' --allow-tool 'shell(git commit:*)' --allow-tool 'shell(git push)' \
+     --deny-tool 'shell(git push --force:*)'
    # Alternativa para pasos mecánicos (commit, push, merge sin conflictos)
    opencode run --dir "<proyecto>" -m opencode/<modelo>-free "Lee HANDOFF.md y cumple exactamente lo que pide."
    ```

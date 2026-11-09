@@ -20,7 +20,7 @@ if ((Has opencode) -and (Runs opencode "--version")) { $st.opencode = $true; Wri
 else { Write-Host "  [--] OpenCode no instalado -> se omite"; $pasos += "npm install -g opencode-ai   (opcional)" }
 
 if ((Has copilot) -and (Runs copilot "--version")) { $st.copilot = $true; Write-Host "  [OK] Copilot CLI (si no has iniciado sesion: ejecuta copilot y usa /login)" }
-else { Write-Host "  [--] Copilot CLI no instalado -> se omite"; $pasos += "Copilot es opcional: requiere suscripcion de GitHub Copilot (plan gratuito disponible)" }
+else { Write-Host "  [--] Copilot CLI no instalado -> se omite"; $pasos += "Copilot (opcional, requiere suscripcion de GitHub Copilot): npm install -g @github/copilot ; luego ejecutar copilot y escribir /login" }
 
 if (Has git) {
   $n = git config --global user.name; $e = git config --global user.email
