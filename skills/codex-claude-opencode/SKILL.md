@@ -72,9 +72,14 @@ codex --version && codex login status     # debe decir "Logged in"
 opencode --version
 ```
 
-Si falta algo: avisar al usuario y correr `setup.ps1` / `setup.sh` del repositorio de la skill.
-Si no hay sesión en Codex, pedir al usuario `codex login` (abre su navegador; Claude no puede hacerlo).
-Si nada está disponible, Claude trabaja solo y lo avisa.
+Detección automática: lo que **no está instalado o no tiene sesión se omite solo**, aunque el JSON lo tenga en `true`.
+Nadie está obligado a usar los tres; con uno solo (o ninguno) la skill funciona igual.
+- `copilot` solo cuenta si `copilot --version` responde; `gh auth status` indica si GitHub está conectado.
+- El script `doctor.sh` / `doctor.ps1` del repositorio muestra el estado y los pasos para conectar lo que falta
+  (`codex login`, `gh auth login`, etc.). Si el usuario es nuevo y falta algo, correrlo y mostrarle esos pasos
+  una sola vez, sin insistir en lo opcional que decida no usar.
+- Claude no puede iniciar sesiones por el usuario (abren el navegador): solo indicar el comando.
+- Si no hay ningún ejecutor disponible, Claude trabaja solo y lo avisa.
 
 ## 4. Flujo de trabajo
 

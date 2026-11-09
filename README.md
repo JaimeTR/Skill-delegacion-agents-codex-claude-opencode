@@ -63,12 +63,35 @@ macOS / Linux / Git Bash:
 ./setup.sh
 ```
 
-El script instala Codex y OpenCode si faltan, copia la skill y agrega la regla a `CLAUDE.md` (sin duplicarla).
+El script te pregunta si instalar Codex y OpenCode, copia la skill, agrega la regla a `CLAUDE.md` (sin duplicarla),
+y termina mostrando qué cuentas faltan por conectar (ver la sección siguiente).
 
-Después, **una sola vez**:
+Después, solo lo que uses (se abre tu navegador):
 ```bash
-codex login      # abre el navegador; inicia con tu cuenta de ChatGPT
+codex login      # cuenta de ChatGPT
+gh auth login    # cuenta de GitHub
 ```
+
+## Conectar cuentas (Codex, GitHub, Copilot) y detección automática
+
+No necesitas usar los tres modelos. La skill **detecta qué tienes y omite el resto solo**:
+
+| Herramienta | Cómo se considera "lista" | Si falta |
+|---|---|---|
+| Codex | instalado y `codex login status` con sesión | se omite; para conectarlo: `codex login` |
+| OpenCode | instalado (sus modelos `-free` no piden cuenta) | se omite |
+| Copilot | `copilot --version` responde (requiere suscripción de GitHub Copilot, hay plan gratuito) | se omite; es opcional |
+| GitHub | `gh auth status` con sesión (y `git` con nombre y correo) | te indica `gh auth login` |
+
+`setup` te **pregunta** antes de instalar cada herramienta (o usa `--yes` / `-Yes`), nunca instala Copilot solo,
+y al final ejecuta `doctor`, que muestra el estado y los comandos para conectar lo que falte.
+Puedes volver a correrlo cuando quieras:
+```bash
+./doctor.sh                                          # macOS / Linux / Git Bash
+powershell -ExecutionPolicy Bypass -File doctor.ps1  # Windows
+```
+Iniciar sesión (`codex login`, `gh auth login`) abre tu navegador, así que lo haces tú; el agente solo te dice el comando.
+Si alguien no usa Copilot, simplemente no aparece en el orden de relevo ni se le asigna nada, y viceversa.
 
 ## Activar y desactivar
 
@@ -129,7 +152,8 @@ skills/codex-claude-opencode/
   references/plantillas-prompts.md # plantillas de prompts de delegación
   references/relevo.md             # relevo y subida a GitHub si se acaba el crédito
 CLAUDE-snippet.md                  # regla que activa la skill en todos los proyectos
-setup.ps1 / setup.sh               # instalación
+setup.ps1 / setup.sh               # instalación guiada
+doctor.ps1 / doctor.sh             # detecta qué está listo y qué falta conectar
 ```
 
 ## Seguridad
