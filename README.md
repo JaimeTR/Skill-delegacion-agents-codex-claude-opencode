@@ -105,6 +105,10 @@ Si Claude ya no tiene crédito, tú inicias el relevo a mano: abres `codex` u `o
 y pegas "Lee HANDOFF.md y cumple exactamente lo que pide". Detalle, plantilla y cuidados (sin force push, sin secretos,
 detenerse ante conflictos) en `skills/codex-claude-opencode/references/relevo.md`.
 
+Cualquiera de los modelos puede commitear y subir. Se define un **orden de relevo** (`"relevo": ["codex", "opencode"]`
+en el JSON del interruptor): si uno falla o se queda sin límite, sigue el siguiente leyendo el mismo `HANDOFF.md`.
+Para repartir trabajo en paralelo, cada modelo usa su propia rama y archivos distintos; la integración final la hace uno solo.
+
 ## Cómo trabaja
 
 1. Plan breve: qué piezas hay y quién hace cada una.

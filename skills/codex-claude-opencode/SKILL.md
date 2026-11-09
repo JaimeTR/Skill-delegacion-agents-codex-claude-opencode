@@ -17,9 +17,10 @@ Estado en un archivo JSON. Se lee en este orden y el primero que exista manda:
 3. Si no existe ninguno: todo activado.
 
 ```json
-{ "enabled": true, "codex": true, "opencode": true }
+{ "enabled": true, "codex": true, "opencode": true, "relevo": ["codex", "opencode"] }
 ```
 
+- `relevo`: orden en que los modelos toman el relevo (terminar, commitear y subir) si Claude se queda sin crédito.
 - `enabled: false` -> NO delegar nada; Claude trabaja solo como si la skill no existiera.
 - `codex: false` -> no usar Codex (sus tareas las hace OpenCode si son simples, o Claude).
 - `opencode: false` -> no usar OpenCode (sus tareas las hace Codex o Claude).

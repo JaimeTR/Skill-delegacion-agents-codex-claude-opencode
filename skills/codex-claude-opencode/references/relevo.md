@@ -71,6 +71,18 @@ Si el proyecto tiene `AGENTS.md`, Codex y OpenCode lo leen solos; conviene que d
 | Commit, push, merge sin conflictos | OpenCode (suficiente) o Codex |
 | Resolver conflictos de merge, ramas protegidas, decisiones | Detener y esperar a Claude / al usuario |
 
+## 4b. Cualquiera puede subir: orden de relevo y reparto
+
+Codex, OpenCode (y Copilot, si está instalado y activo) pueden hacer commit y push. Se reparte así:
+- **Orden de relevo** (configurable en el JSON del interruptor): `"relevo": ["codex", "opencode", "copilot"]`.
+  El primero disponible (instalado, con sesión y activado) toma el relevo; si se queda sin límite o falla,
+  sigue el siguiente leyendo el mismo `HANDOFF.md` actualizado.
+- **Reparto en paralelo** (solo con archivos distintos): cada uno trabaja en su propia rama
+  (`feat/<tarea>-codex`, `feat/<tarea>-opencode`) y se integran después con un merge revisado.
+  Nunca dos modelos en la misma rama ni en los mismos archivos al mismo tiempo.
+- **Integrar y subir a `develop`/`main`** lo hace uno solo, el último del orden, tras correr los tests.
+- Cada modelo, al terminar su turno, actualiza el final de `HANDOFF.md` (qué hizo, rama, commit) para el siguiente.
+
 ## 5. Cuidados
 - Los modelos gratuitos son menos fiables: dar pasos mecánicos y exactos, nunca decisiones.
 - Un solo agente trabajando a la vez en el proyecto.
